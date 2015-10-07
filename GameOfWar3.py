@@ -1,10 +1,10 @@
 __author__ = 'alicia.williams'
 
 # CIS-125 FA 2015
-# Week 5: GameOfWar.py
-# File: GameOfWar.py
-# Code to play the game of war where when players
-# are tied, they both lose their cards.
+# Week 5: GameOfWar2.py
+# File: GameOfWar2.py
+# Code play the game of war including times when
+# players tie and start a war.
 # Collaboration with Rebekah Orth and Dr. Neumann
 
 #!/usr/bin/env python
@@ -75,15 +75,39 @@ def playRound(PlayerA, PlayerB):
 		PlayerB.insert(0,Acard)
 		PlayerB.insert(0,Bcard)
 	else:
+		#go to war
+		PlayerA.append(Acard)
+		PlayerB.append(Bcard)
 		PlayerA, PlayerB = WAR(PlayerA, PlayerB)
 		
 	return PlayerA, PlayerB
 
 
 def WAR(PlayerA, PlayerB):
-	# See the README.md file for instructions on coding 
-	# This module.
-
+	print("War")	
+	#Start with blank lists
+	Astack = []
+	Bstack = []
+	
+	if len(PlayerA) > 5 and len(PlayerB) > 5:
+	
+	
+		#to get 4 cards and save them, use a loop
+		for x in range(5):
+			Astack.append(PlayerA.pop())
+			Bstack.append(PlayerB.pop())
+		
+		if getRank(Astack[4]) > getRank(Bstack[4]):
+			#A wins; A gets A and B's cards
+			PlayerA = Astack + Bstack + PlayerA
+		    
+		elif getRank(Bstack[4]) > getRank(Astack[4]):
+			# B wins; B gets A and B's cards
+			PlayerB = Astack + Bstack + PlayerB
+			
+		else:
+			pass
+	
 	return PlayerA, PlayerB
 
 	
@@ -93,4 +117,3 @@ def getRank(anyCard):
 
 if __name__ == '__main__':
 	main()
-
